@@ -8,5 +8,17 @@ def display_topics(request):
     return render(request,'display_topics.html',d)
 def display_webpages(request):
     LWO=Webpage.objects.all()
+    LWO=Webpage.objects.filter(topic_name='Cricket')
+    LWO=Webpage.objects.exclude(topic_name='Cricket')
+    LWO=Webpage.objects.all()[2:5:]
+    LWO=Webpage.objects.all().order_by('name')
+    LWO=Webpage.objects.filter(topic_name='Cricket').order_by('-name')
+    LWO=Webpage.objects.all().order_by(Length('name'))
+    LWO=Webpage.objects.all().order_by(Length('name').desc())
     d={'LWO':LWO}
     return render(request,'display_webpages.html',d)
+
+def display_access(request):
+    LAO=AccessRecords.objects.all()
+    d={'LAO':LAO}
+    return render(request,'display_access.html',d)
