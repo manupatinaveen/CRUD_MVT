@@ -9,6 +9,7 @@
 <body>
     <center>
         <h1>Webpage Model Data</h1>
+        <table border="3px">
         <tr>
             <th>Topic_name</th>
             <th>Name</th>
@@ -16,12 +17,14 @@
         </tr>
         {% for W in LWO %}
         <tr>
-            <td>{{W.Topic_name}}</td>
-            <td>{{W.Name}}</td>
-            <td>{{W.URL}}</td>
+            <td>{{W.topic_name}}</td>
+            <td>{{W.name}}</td>
+            <td>{{W.url}}</td>
 
         </tr>
-        {% forend %}
+
+        {% endfor %}
+    </table>
     </center>
 </body>
 </html>
