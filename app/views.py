@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
 # Create your views here.
 from django.db.models import Q
 from app.models import *
@@ -8,7 +8,7 @@ def display_topics(request):
     LTO=Topic.objects.all()
     d={'LTO':LTO}
     return render(request,'display_topics.html',d)
-def display_webpages(request):
+def display_webpage(request):
     LWO=Webpage.objects.all()
     LWO=Webpage.objects.filter(topic_name='Cricket')
     LWO=Webpage.objects.exclude(topic_name='Cricket')
@@ -40,3 +40,20 @@ def display_access(request):
     LAO=Access_Records.objects.filter(date__year__gte='2022')
     d={'LAO':LAO}
     return render(request,'display_access.html',d)
+
+def display_webpages(request):
+    Webpage.objects.filter(topic_name='Boxing').update(name='Naveen',url='https://naveen.com')
+    Webpage.objects.filter(name='s raina').update(topic_name='Foot Ball')
+    
+    T=Topic.objects.get_or_create(topic_name='Cricket')[0]
+    T.save()
+    Webpage.objects.update_or_create(name="XYZ",defaults={'topic_name':T,'url':'https://ABD.in'})
+    LWO=Webpage.objects.all()
+    d={'LWO':LWO}
+    return render(request,'display_webpages.html',d)
+def delete_webpage(request):
+    Webpage.objects.filter(topic_name='Cricket').delete()
+    Webpage.objects.all().delete()
+    LWO=Webpage.objects.all()
+    d={'LWO':LWO}
+    return render(request,'display_webpages.html',d)
